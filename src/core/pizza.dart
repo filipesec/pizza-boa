@@ -6,16 +6,12 @@ abstract class Pizza extends Product implements Nutrition {
   const Pizza(String name, double price, this._calories) : super(name, price);
 
   @override
-  String getName() => super.getName();
-  @override
-  double getPrice() => super.getPrice();
-  @override
   double getCalories() => _calories;
 }
 
 //pizzas fixas  MARGHERITA | HAWAIIAN PIZZA | SALAMI PIZZA
-class Margherita extends Pizza {
-  const Margherita() : super('Margherita', 10.0, 1104);
+class MargheritaPizza extends Pizza {
+  const MargheritaPizza() : super('Margherita', 10.0, 1104);
 }
 
 class HawaiianPizza extends Pizza {
@@ -28,17 +24,17 @@ class SalamiPizza extends Pizza {
 
 //decorator base para criação de pizzas personalizadas
 abstract class PizzaDecorator extends Pizza {
-  final Pizza pizza;
+  final Pizza _pizza;
 
-  PizzaDecorator(this.pizza)
-    : super(pizza.getName(), pizza.getPrice(), pizza._calories);
+  PizzaDecorator(this._pizza)
+    : super(_pizza.getName(), _pizza.getPrice(), _pizza.getCalories());
 
   @override
-  String getName() => pizza.getName();
+  String getName() => _pizza.getName();
   @override
-  double getPrice() => pizza.getPrice();
+  double getPrice() => _pizza.getPrice();
   @override
-  double getCalories() => pizza.getCalories();
+  double getCalories() => _pizza.getCalories();
 }
 
 //ingredientes
@@ -46,44 +42,44 @@ class Cheese extends PizzaDecorator {
   Cheese(super.pizza);
 
   @override
-  String getName() => "${pizza.getName()} + Queijo";
+  String getName() => "${_pizza.getName()} + Queijo";
   @override
-  double getPrice() => pizza.getPrice() + 0.69;
+  double getPrice() => _pizza.getPrice() + 0.69;
   @override
-  double getCalories() => pizza.getCalories() + 92;
+  double getCalories() => _pizza.getCalories() + 92;
 }
 
 class Ham extends PizzaDecorator {
   Ham(super.pizza);
 
   @override
-  String getName() => "${pizza.getName()} + Presunto";
+  String getName() => "${_pizza.getName()} + Presunto";
   @override
-  double getPrice() => pizza.getPrice() + 0.99;
+  double getPrice() => _pizza.getPrice() + 0.99;
   @override
-  double getCalories() => pizza.getCalories() + 35;
+  double getCalories() => _pizza.getCalories() + 35;
 }
 
 class Onion extends PizzaDecorator {
   Onion(super.pizza);
 
   @override
-  String getName() => "${pizza.getName()} + Cebola";
+  String getName() => "${_pizza.getName()} + Cebola";
   @override
-  double getPrice() => pizza.getPrice() + 0.69;
+  double getPrice() => _pizza.getPrice() + 0.69;
   @override
-  double getCalories() => pizza.getCalories() + 22;
+  double getCalories() => _pizza.getCalories() + 22;
 }
 
 class Pineapple extends PizzaDecorator {
   Pineapple(super.pizza);
 
   @override
-  String getName() => "${pizza.getName()} + Abacaxi";
+  String getName() => "${_pizza.getName()} + Abacaxi";
   @override
-  double getPrice() => pizza.getPrice() + 0.79;
+  double getPrice() => _pizza.getPrice() + 0.79;
   @override
-  double getCalories() => pizza.getCalories() + 24;
+  double getCalories() => _pizza.getCalories() + 24;
 }
 
 //tamanho
@@ -91,9 +87,9 @@ class FamilySize extends PizzaDecorator {
   FamilySize(super.pizza);
 
   @override
-  String getName() => "${pizza.getName()} + Tamanho Família";
+  String getName() => "${_pizza.getName()} + Tamanho Família";
   @override
-  double getPrice() => pizza.getPrice() + 4.15;
+  double getPrice() => _pizza.getPrice() + 4.15;
   @override
-  double getCalories() => pizza.getCalories() * 1.95;
+  double getCalories() => _pizza.getCalories() * 1.95;
 }

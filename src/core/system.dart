@@ -42,11 +42,6 @@ class System {
     _currentRequest = _currentRequest.addMerchandise(merchandise);
   }
 
-  //retorna o preco total do pedido
-  double getTotalPrice() {
-    return _currentRequest.getTotalPrice();
-  }
-
   //finaliza o pedido e imprime o recibo
   void checkout() {
     _currentRequest.printReceipt();

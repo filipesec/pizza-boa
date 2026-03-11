@@ -6,10 +6,7 @@ abstract class Drink extends Product implements Nutrition {
 
   //construtor da classe drink e da classe pai(Product)
   const Drink(String name, double price, this._calories) : super(name, price);
-  @override
-  String getName() => super.getName();
-  @override
-  double getPrice() => super.getPrice();
+
   @override
   double getCalories() => _calories;
 }

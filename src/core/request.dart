@@ -5,45 +5,52 @@ import 'merchandise.dart';
 //representa um pedido (comanda) do cliente
 class Request {
   //lista de pizzas do pedido
-  final List<Pizza> pizzas;
+  final List<Pizza> _pizzas;
 
   // lista de bebidas do pedido
-  final List<Drink> drinks;
+  final List<Drink> _drinks;
 
   //lista de produtos de merchandise
-  final List<Merchandise> merchandises;
+  final List<Merchandise> _merchandises;
 
-  //construtor const para manter imutabilidade
+  //getters publicos para acessar as listas
+  List<Pizza> get pizzas => List.unmodifiable(_pizzas);
+  List<Drink> get drinks => List.unmodifiable(_drinks);
+  List<Merchandise> get merchandises => List.unmodifiable(_merchandises);
+
+  //construtor
   const Request({
-    this.pizzas = const [],
-    this.drinks = const [],
-    this.merchandises = const [],
-  });
+    List<Pizza> pizzas = const [],
+    List<Drink> drinks = const [],
+    List<Merchandise> merchandises = const [],
+  }) : _pizzas = pizzas,
+       _drinks = drinks,
+       _merchandises = merchandises;
 
   //adiciona uma pizza ao pedido
   Request addPizza(Pizza pizza) {
     return Request(
-      pizzas: [...pizzas, pizza],
-      drinks: drinks,
-      merchandises: merchandises,
+      pizzas: [..._pizzas, pizza],
+      drinks: _drinks,
+      merchandises: _merchandises,
     );
   }
 
   //adiciona uma bebida ao pedido
   Request addDrink(Drink drink) {
     return Request(
-      pizzas: pizzas,
-      drinks: [...drinks, drink],
-      merchandises: merchandises,
+      pizzas: _pizzas,
+      drinks: [..._drinks, drink],
+      merchandises: _merchandises,
     );
   }
 
   //adiciona um item de merchandise ao pedido
   Request addMerchandise(Merchandise merchandise) {
     return Request(
-      pizzas: pizzas,
-      drinks: drinks,
-      merchandises: [...merchandises, merchandise],
+      pizzas: _pizzas,
+      drinks: _drinks,
+      merchandises: [..._merchandises, merchandise],
     );
   }
 
@@ -51,18 +58,15 @@ class Request {
   double getTotalPrice() {
     double total = 0;
 
-    //soma o preco das pizzas
-    for (final pizza in pizzas) {
+    for (final pizza in _pizzas) {
       total += pizza.getPrice();
     }
 
-    //soma o preco das bebidas
-    for (final drink in drinks) {
+    for (final drink in _drinks) {
       total += drink.getPrice();
     }
 
-    //soma o preco do merchandise
-    for (final merch in merchandises) {
+    for (final merch in _merchandises) {
       total += merch.getPrice();
     }
 
@@ -73,11 +77,11 @@ class Request {
   double getTotalCalories() {
     double total = 0;
 
-    for (final pizza in pizzas) {
+    for (final pizza in _pizzas) {
       total += pizza.getCalories();
     }
 
-    for (final drink in drinks) {
+    for (final drink in _drinks) {
       total += drink.getCalories();
     }
 
@@ -88,7 +92,7 @@ class Request {
   void printReceipt() {
     print("------ Pedido PizzaBoa ------");
 
-    for (final pizza in pizzas) {
+    for (final pizza in _pizzas) {
       print(
         "${pizza.getName()} "
         "- ${pizza.getCalories()} cal "
@@ -96,7 +100,7 @@ class Request {
       );
     }
 
-    for (final drink in drinks) {
+    for (final drink in _drinks) {
       print(
         "${drink.getName()} "
         "- ${drink.getCalories()} cal "
@@ -104,7 +108,7 @@ class Request {
       );
     }
 
-    for (final merch in merchandises) {
+    for (final merch in _merchandises) {
       print(
         "${merch.getName()} "
         "- \$${merch.getPrice().toStringAsFixed(2)}",

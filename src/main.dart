@@ -10,7 +10,7 @@ void main() {
   system.startNewRequest();
 
   // cria uma pizza base
-  Pizza pizza = const Margherita();
+  Pizza pizza = const MargheritaPizza();
   Pizza pizza2 = const SalamiPizza();
 
   // adiciona ingredientes (decorator)
