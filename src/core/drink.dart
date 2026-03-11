@@ -2,16 +2,16 @@ import 'product.dart';
 
 //classe abstrata base para bebidas
 abstract class Drink extends Product implements Nutrition {
-  final double calories;
+  final double _calories;
 
   //construtor da classe drink e da classe pai(Product)
-  const Drink(String name, double price, this.calories) : super(name, price);
+  const Drink(String name, double price, this._calories) : super(name, price);
   @override
-  String getName() => name;
+  String getName() => super.getName();
   @override
-  double getPrice() => price;
+  double getPrice() => super.getPrice();
   @override
-  double getCalories() => calories;
+  double getCalories() => _calories;
 }
 //classes filhas da classe Drink
 

@@ -1,16 +1,16 @@
 import 'product.dart';
 
 abstract class Pizza extends Product implements Nutrition {
-  final double calories;
+  final double _calories;
 
-  const Pizza(String name, double price, this.calories) : super(name, price);
+  const Pizza(String name, double price, this._calories) : super(name, price);
 
   @override
-  String getName() => name;
+  String getName() => super.getName();
   @override
-  double getPrice() => price;
+  double getPrice() => super.getPrice();
   @override
-  double getCalories() => calories;
+  double getCalories() => _calories;
 }
 
 //pizzas fixas  MARGHERITA | HAWAIIAN PIZZA | SALAMI PIZZA
@@ -30,7 +30,8 @@ class SalamiPizza extends Pizza {
 abstract class PizzaDecorator extends Pizza {
   final Pizza pizza;
 
-  PizzaDecorator(this.pizza) : super(pizza.name, pizza.price, pizza.calories);
+  PizzaDecorator(this.pizza)
+    : super(pizza.getName(), pizza.getPrice(), pizza._calories);
 
   @override
   String getName() => pizza.getName();
